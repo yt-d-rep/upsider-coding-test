@@ -1,10 +1,10 @@
 package usecase
 
 import (
-	"upsider-base/domain/auth"
-	"upsider-base/domain/company"
-	"upsider-base/domain/user"
-	"upsider-base/shared"
+	"upsider-coding-test/domain/auth"
+	"upsider-coding-test/domain/company"
+	"upsider-coding-test/domain/user"
+	"upsider-coding-test/shared"
 )
 
 type (

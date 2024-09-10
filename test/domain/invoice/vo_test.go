@@ -4,7 +4,7 @@ import (
 	"math/big"
 	"reflect"
 	"testing"
-	"upsider-base/domain/invoice"
+	"upsider-coding-test/domain/invoice"
 )
 
 func Test_NewFeeRate(t *testing.T) {

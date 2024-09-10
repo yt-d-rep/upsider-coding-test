@@ -11,7 +11,7 @@ package auth_mock
 
 import (
 	reflect "reflect"
-	auth "upsider-base/domain/auth"
+	auth "upsider-coding-test/domain/auth"
 
 	gomock "go.uber.org/mock/gomock"
 )

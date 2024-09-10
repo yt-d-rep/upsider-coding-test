@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"upsider-base/domain/auth"
+	"upsider-coding-test/domain/auth"
 
 	"github.com/gin-gonic/gin"
 )

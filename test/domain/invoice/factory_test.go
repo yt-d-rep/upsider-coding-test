@@ -3,8 +3,8 @@ package invoice_test
 import (
 	"testing"
 	"time"
-	"upsider-base/domain/invoice"
-	shared_mock "upsider-base/mock/shared"
+	"upsider-coding-test/domain/invoice"
+	shared_mock "upsider-coding-test/mock/shared"
 
 	"go.uber.org/mock/gomock"
 )

@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"upsider-base/usecase"
+	"upsider-coding-test/usecase"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,7 +14,7 @@ type (
 	userHandler struct {
 		userUsecase usecase.UserUsecase
 	}
-	userCreateParams struct {
+	UserCreateParams struct {
 		Username    string `json:"name" binding:"required"`
 		Email       string `json:"email" binding:"required"`
 		RawPassword string `json:"password" binding:"required"`
@@ -27,7 +27,7 @@ type (
 )
 
 func (h *userHandler) Register(ctx *gin.Context) {
-	var params userCreateParams
+	var params UserCreateParams
 	if err := ctx.ShouldBindJSON(&params); err != nil {
 		ctx.JSON(400, gin.H{"message": err.Error()})
 		return

@@ -2,9 +2,9 @@ package usecase
 
 import (
 	"sync"
-	"upsider-base/domain/auth"
-	"upsider-base/domain/invoice"
-	"upsider-base/domain/user"
+	"upsider-coding-test/domain/auth"
+	"upsider-coding-test/domain/invoice"
+	"upsider-coding-test/domain/user"
 
 	"github.com/google/wire"
 )

@@ -11,9 +11,9 @@ package usecase_mock
 
 import (
 	reflect "reflect"
-	auth "upsider-base/domain/auth"
-	user "upsider-base/domain/user"
-	usecase "upsider-base/usecase"
+	auth "upsider-coding-test/domain/auth"
+	user "upsider-coding-test/domain/user"
+	usecase "upsider-coding-test/usecase"
 
 	gomock "go.uber.org/mock/gomock"
 )

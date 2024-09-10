@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"sync"
-	"upsider-base/domain/auth"
+	"upsider-coding-test/domain/auth"
 
 	"github.com/google/wire"
 )

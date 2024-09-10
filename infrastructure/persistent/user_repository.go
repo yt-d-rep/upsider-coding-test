@@ -3,9 +3,9 @@ package persistent
 import (
 	"database/sql"
 	"fmt"
-	"upsider-base/domain/auth"
-	"upsider-base/domain/company"
-	"upsider-base/domain/user"
+	"upsider-coding-test/domain/auth"
+	"upsider-coding-test/domain/company"
+	"upsider-coding-test/domain/user"
 )
 
 type (

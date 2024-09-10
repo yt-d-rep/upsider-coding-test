@@ -1,6 +1,6 @@
 package middleware
 
-import "upsider-base/domain/auth"
+import "upsider-coding-test/domain/auth"
 
 type (
 	tokenService struct{}

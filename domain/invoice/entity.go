@@ -3,7 +3,7 @@ package invoice
 import (
 	"math/big"
 	"time"
-	"upsider-base/domain/company"
+	"upsider-coding-test/domain/company"
 )
 
 type (

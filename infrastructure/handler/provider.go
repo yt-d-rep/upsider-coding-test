@@ -2,7 +2,7 @@ package handler
 
 import (
 	"sync"
-	"upsider-base/usecase"
+	"upsider-coding-test/usecase"
 
 	"github.com/google/wire"
 )

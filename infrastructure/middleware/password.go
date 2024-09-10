@@ -2,8 +2,8 @@ package middleware
 
 import (
 	"strings"
-	"upsider-base/domain/auth"
-	"upsider-base/shared"
+	"upsider-coding-test/domain/auth"
+	"upsider-coding-test/shared"
 
 	"golang.org/x/crypto/bcrypt"
 )

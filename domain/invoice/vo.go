@@ -6,7 +6,7 @@ import (
 
 	"github.com/google/uuid"
 
-	"upsider-base/shared"
+	"upsider-coding-test/shared"
 )
 
 type (

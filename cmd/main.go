@@ -1,6 +1,6 @@
 package main
 
-import "upsider-base/infrastructure/server"
+import "upsider-coding-test/infrastructure/server"
 
 func main() {
 	server.Serve()

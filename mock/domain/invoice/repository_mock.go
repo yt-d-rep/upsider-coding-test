@@ -11,9 +11,9 @@ package invoice_mock
 
 import (
 	reflect "reflect"
-	company "upsider-base/domain/company"
-	invoice "upsider-base/domain/invoice"
-	shared "upsider-base/shared"
+	company "upsider-coding-test/domain/company"
+	invoice "upsider-coding-test/domain/invoice"
+	shared "upsider-coding-test/shared"
 
 	gomock "go.uber.org/mock/gomock"
 )

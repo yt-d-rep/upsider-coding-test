@@ -11,8 +11,8 @@ package usecase_mock
 
 import (
 	reflect "reflect"
-	invoice "upsider-base/domain/invoice"
-	usecase "upsider-base/usecase"
+	invoice "upsider-coding-test/domain/invoice"
+	usecase "upsider-coding-test/usecase"
 
 	gomock "go.uber.org/mock/gomock"
 )

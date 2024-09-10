@@ -2,7 +2,7 @@ package invoice
 
 import (
 	"sync"
-	"upsider-base/shared"
+	"upsider-coding-test/shared"
 
 	"github.com/google/wire"
 )

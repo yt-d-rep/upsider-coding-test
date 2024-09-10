@@ -4,13 +4,13 @@ package di
 
 import (
 	"sync"
-	"upsider-base/domain/invoice"
-	"upsider-base/domain/user"
-	"upsider-base/infrastructure/handler"
-	"upsider-base/infrastructure/middleware"
-	"upsider-base/infrastructure/persistent"
-	"upsider-base/shared"
-	"upsider-base/usecase"
+	"upsider-coding-test/domain/invoice"
+	"upsider-coding-test/domain/user"
+	"upsider-coding-test/infrastructure/handler"
+	"upsider-coding-test/infrastructure/middleware"
+	"upsider-coding-test/infrastructure/persistent"
+	"upsider-coding-test/shared"
+	"upsider-coding-test/usecase"
 
 	"github.com/google/wire"
 )

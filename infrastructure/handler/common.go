@@ -6,7 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"log/slog"
-	"upsider-base/shared"
+	"upsider-coding-test/shared"
 
 	"github.com/gin-gonic/gin"
 )

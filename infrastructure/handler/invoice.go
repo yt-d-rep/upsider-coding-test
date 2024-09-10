@@ -2,7 +2,7 @@ package handler
 
 import (
 	"time"
-	"upsider-base/usecase"
+	"upsider-coding-test/usecase"
 
 	"github.com/gin-gonic/gin"
 )

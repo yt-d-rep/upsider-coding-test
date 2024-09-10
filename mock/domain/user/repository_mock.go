@@ -11,7 +11,7 @@ package user_mock
 
 import (
 	reflect "reflect"
-	user "upsider-base/domain/user"
+	user "upsider-coding-test/domain/user"
 
 	gomock "go.uber.org/mock/gomock"
 )

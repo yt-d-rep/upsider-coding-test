@@ -1,8 +1,8 @@
 package invoice
 
 import (
-	"upsider-base/domain/company"
-	"upsider-base/shared"
+	"upsider-coding-test/domain/company"
+	"upsider-coding-test/shared"
 )
 
 type (

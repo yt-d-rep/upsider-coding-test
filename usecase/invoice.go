@@ -2,9 +2,9 @@ package usecase
 
 import (
 	"time"
-	"upsider-base/domain/company"
-	"upsider-base/domain/invoice"
-	"upsider-base/shared"
+	"upsider-coding-test/domain/company"
+	"upsider-coding-test/domain/invoice"
+	"upsider-coding-test/shared"
 )
 
 type (

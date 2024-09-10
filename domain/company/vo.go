@@ -1,7 +1,7 @@
 package company
 
 import (
-	"upsider-base/shared"
+	"upsider-coding-test/shared"
 
 	"github.com/google/uuid"
 )

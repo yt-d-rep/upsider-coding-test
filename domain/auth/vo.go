@@ -1,6 +1,6 @@
 package auth
 
-import "upsider-base/shared"
+import "upsider-coding-test/shared"
 
 type (
 	RawPassword    string
