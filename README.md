@@ -1,4 +1,4 @@
-# upsider-base
+# upsider-coding-test
 
 ## 開発
 
@@ -18,3 +18,16 @@ make migration
 # DBマイグレーションのロールバック
 make rollback
 ```
+
+## テスト
+
+### e2e
+
+下記コマンドでAPI起動
+
+```bash
+make serve
+```
+
+VSCodeの拡張機能であるREST Clientをインストールする。  
+[.http/api.http](.http/api.http)を開き、リクエストを送る。
