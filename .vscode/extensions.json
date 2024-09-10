@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "ms-vscode-remote.remote-containers",
+    "humao.rest-client",
+    "bierner.markdown-mermaid",
+    "golang.go",
+    "766b.go-outliner"
+  ]
+}

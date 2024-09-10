@@ -1,0 +1,10 @@
+.DS_Store
+.aws
+.ssh
+
+tmp/
+.tmp/
+*.tmp
+*.log
+data/
+work/

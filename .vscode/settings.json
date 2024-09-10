@@ -1,0 +1,12 @@
+{
+  "rest-client.defaultHeaders": {
+    "User-Agent": "vscode-restclient",
+    "Request-Body-Format": "json",
+    "Response-Body-Format": "json",
+  },
+  "rest-client.environmentVariables": {
+    "$shared": {
+      "url:api": "http://localhost:8080"
+    }
+  }
+}
