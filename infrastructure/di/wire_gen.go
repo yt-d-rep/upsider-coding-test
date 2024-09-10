@@ -9,10 +9,12 @@ package di
 import (
 	"github.com/google/wire"
 	"sync"
+	"upsider-base/domain/invoice"
 	"upsider-base/domain/user"
 	"upsider-base/infrastructure/handler"
 	"upsider-base/infrastructure/middleware"
 	"upsider-base/infrastructure/persistent"
+	"upsider-base/shared"
 	"upsider-base/usecase"
 )
 
@@ -27,15 +29,21 @@ func Wire() *HandlerCollection {
 	userService := user.ProvideUserService(userRepository)
 	userUsecase := usecase.ProvideUserUsecase(userService, userRepository, passwordService, tokenService)
 	userHandler := handler.ProvideUserHandler(userUsecase)
-	handlerCollection := ProvideHandlerCollection(interceptor, userHandler)
+	clock := shared.ProvideClock()
+	invoiceFactory := invoice.ProvideInvoiceFactory(clock)
+	invoiceRepository := persistent.ProvideInvoiceRepository(db)
+	invoiceUsecase := usecase.ProvideInvoiceUsecase(invoiceFactory, invoiceRepository)
+	invoiceHandler := handler.ProvideInvoiceHandler(invoiceUsecase)
+	handlerCollection := ProvideHandlerCollection(interceptor, userHandler, invoiceHandler)
 	return handlerCollection
 }
 
 // wire.go:
 
 type HandlerCollection struct {
-	Interceptor *middleware.Interceptor
-	UserHandler handler.UserHandler
+	Interceptor    *middleware.Interceptor
+	UserHandler    handler.UserHandler
+	InvoiceHandler handler.InvoiceHandler
 }
 
 var (
@@ -50,11 +58,13 @@ var (
 func ProvideHandlerCollection(
 	intrceptr *middleware.Interceptor,
 	uHdl handler.UserHandler,
+	iHdl handler.InvoiceHandler,
 ) *HandlerCollection {
 	hdlOnce.Do(func() {
 		hdl = &HandlerCollection{
-			Interceptor: intrceptr,
-			UserHandler: uHdl,
+			Interceptor:    intrceptr,
+			UserHandler:    uHdl,
+			InvoiceHandler: iHdl,
 		}
 	})
 	return hdl

@@ -22,3 +22,20 @@ Content-Type: application/json
   "email": "sample@sample.com",
   "password": "12345678"
 }
+
+### POST /api/invoices
+POST {{url:api}}/api/invoices
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "company_id": "{{company_id}}",
+  "partner_id": "{{partner_id}}",
+  "payment_amount": 10000
+}
+
+### GET /api/invoices
+@from=2024-09-09T15%3A00%3A00Z
+@to=2024-09-10T14%3A59%3A59Z
+GET {{url:api}}/api/invoices?company_id={{company_id}}&from={{from}}&to={{to}}
+Authorization: Bearer {{token}}

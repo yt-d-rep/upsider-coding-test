@@ -6,6 +6,7 @@ import (
 	"os"
 	"sync"
 	"upsider-base/domain/auth"
+	"upsider-base/domain/invoice"
 	"upsider-base/domain/user"
 
 	"github.com/google/wire"
@@ -19,10 +20,15 @@ var (
 	uRepo     *userRepository
 	uRepoOnce sync.Once
 
+	ivcRepo     *invoiceRepository
+	ivcRepoOnce sync.Once
+
 	PersistentProviderSet wire.ProviderSet = wire.NewSet(
 		ProvideDB,
 		ProvideUserRepository,
+		ProvideInvoiceRepository,
 		wire.Bind(new(user.UserRepository), new(*userRepository)),
+		wire.Bind(new(invoice.InvoiceRepository), new(*invoiceRepository)),
 	)
 )
 
@@ -51,4 +57,13 @@ func ProvideUserRepository(db *sql.DB, pSvc auth.PasswordService) *userRepositor
 		}
 	})
 	return uRepo
+}
+
+func ProvideInvoiceRepository(db *sql.DB) *invoiceRepository {
+	ivcRepoOnce.Do(func() {
+		ivcRepo = &invoiceRepository{
+			db: db,
+		}
+	})
+	return ivcRepo
 }

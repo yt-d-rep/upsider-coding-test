@@ -1,4 +1,4 @@
-.PHONY: start-dev stop-dev restart-dev migration rollback setup serve gen-wire gen-mock
+.PHONY: start-dev stop-dev restart-dev migration rollback setup serve gen-wire gen-mock test
 
 start-dev:
 	docker compose up -d --build
@@ -28,3 +28,6 @@ gen-wire:
 
 gen-mock:
 	bash ./.script/gen-mock.sh
+
+test:
+	go test -v ./test/...
