@@ -1,0 +1,24 @@
+@token={{login.response.body.$.token}}
+@company_id=b8e7fce5-77a5-4e64-9e3c-90e0c5b4c17d
+@partner_id=a5b6f8d4-9b44-4f9e-919f-d5cb2d7b8e9f
+
+### POST /api/user
+POST {{url:api}}/api/users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "sample@sample.com",
+  "password": "12345678",
+  "company_id": "{{company_id}}"
+}
+
+### POST /api/login
+# @name login
+POST {{url:api}}/api/login
+Content-Type: application/json
+
+{
+  "email": "sample@sample.com",
+  "password": "12345678"
+}
