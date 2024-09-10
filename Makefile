@@ -14,11 +14,11 @@ setup:
 	go install github.com/google/wire/cmd/wire@latest
 	go install go.uber.org/mock/mockgen@latest
 
-migration:
-	cd migration && go run migrate.go up
+migrate:
+	migrate -source file://./db/migration -database postgres://main:main@db:5432/main?sslmode=disable up
 
 rollback:
-	cd migration && go run migrate.go down
+	migrate -source file://./db/migration -database postgres://main:main@db:5432/main?sslmode=disable down
 
 serve:
 	go run cmd/main.go
