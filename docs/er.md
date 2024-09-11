@@ -51,12 +51,12 @@ erDiagram
         UUID company_id FK
         UUID partner_id FK
         timestamp issued_at
-        int8 payment_amount
-        int8 fee
+        decimal payment_amount
+        decimal fee
         decimal fee_rate
-        int8 consumption_tax
+        decimal consumption_tax
         decimal consumption_tax_rate
-        int8 invoice_amount
+        decimal invoice_amount
         timestamp payment_due_at
         int status
         timestamp created_at

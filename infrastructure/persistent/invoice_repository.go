@@ -37,12 +37,12 @@ func (r *invoiceRepository) Save(invoice *invoice.Invoice) error {
 		invoice.CompanyID().String(),
 		invoice.PartnerID().String(),
 		invoice.IssuedAt(),
-		invoice.PaymentAmount(),
-		invoice.Fee(),
-		invoice.FeeRate().String(),
-		invoice.ConsumptionTax(),
-		invoice.ConsumptionTaxRate().String(),
-		invoice.InvoiceAmount(),
+		invoice.PaymentAmount().String(),
+		invoice.Fee().Value().String(),
+		invoice.Fee().Rate().String(),
+		invoice.ConsumptionTax().Value().String(),
+		invoice.ConsumptionTax().Rate().String(),
+		invoice.InvoiceAmount().String(),
 		invoice.PaymentDueAt(),
 		invoice.Status(),
 	)
@@ -83,12 +83,12 @@ func (r *invoiceRepository) ListBetween(timeRange *shared.TimeRange, companyID c
 		CompanyID          string
 		PartnerID          string
 		IssuedAt           time.Time
-		PaymentAmount      int64
-		Fee                int64
+		PaymentAmount      string
+		Fee                string
 		FeeRate            string
-		ConsumptionTax     int64
+		ConsumptionTax     string
 		ConsumptionTaxRate string
-		InvoiceAmount      int64
+		InvoiceAmount      string
 		PaymentDueAt       time.Time
 		Status             int
 	}

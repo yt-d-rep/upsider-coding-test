@@ -15,7 +15,7 @@ type (
 	IssueInput struct {
 		CompanyID     company.CompanyID
 		PartnerID     company.PartnerID
-		PaymentAmount int64
+		PaymentAmount string
 	}
 )
 
@@ -26,32 +26,20 @@ func (f *invoiceFactory) Issue(input *IssueInput) (*Invoice, error) {
 	if err != nil {
 		return &Invoice{}, err
 	}
-	if paymentAmount.IsZero() {
-		return &Invoice{}, &shared.ValidationError{Field: "payment_amount", Err: "payment amount must be greater than 0"}
-	}
-	feeRate, err := NewFeeRate()
-	if err != nil {
-		return &Invoice{}, err
-	}
-	consumptionTaxRate, err := NewConsumptionTaxRate()
-	if err != nil {
-		return &Invoice{}, err
-	}
+	// メタデータと金額計算に必要な情報を設定してinvoice生成
 	invoice := &Invoice{
-		id:                 id,
-		companyID:          input.CompanyID,
-		partnerID:          input.PartnerID,
-		feeRate:            feeRate,
-		consumptionTaxRate: consumptionTaxRate,
-		issuedAt:           issuedAt,
-		paymentAmount:      paymentAmount,
-		status:             Unpaid,
+		id:            id,
+		companyID:     input.CompanyID,
+		partnerID:     input.PartnerID,
+		issuedAt:      issuedAt,
+		paymentAmount: paymentAmount,
+		status:        Unpaid,
 	}
-	err = invoice.calculateFee()
+	err = invoice.calculateFee(CurrentFeeRate)
 	if err != nil {
 		return &Invoice{}, err
 	}
-	err = invoice.calculateConsumptionTax()
+	err = invoice.calculateConsumptionTax(CurrentConsumptionTaxRate)
 	if err != nil {
 		return &Invoice{}, err
 	}

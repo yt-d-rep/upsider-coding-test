@@ -31,7 +31,7 @@ Authorization: Bearer {{token}}
 {
   "company_id": "{{company_id}}",
   "partner_id": "{{partner_id}}",
-  "payment_amount": 10000
+  "payment_amount": "10000"
 }
 
 ### GET /api/invoices

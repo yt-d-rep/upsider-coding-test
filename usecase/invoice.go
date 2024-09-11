@@ -19,7 +19,7 @@ type (
 	IssueInput struct {
 		CompanyID     string
 		PartnerID     string
-		PaymentAmount int64
+		PaymentAmount string
 	}
 	ListBetweenInput struct {
 		From      time.Time

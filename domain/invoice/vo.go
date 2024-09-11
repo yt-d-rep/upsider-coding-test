@@ -1,20 +1,30 @@
 package invoice
 
 import (
-	"errors"
-	"math/big"
-
 	"github.com/google/uuid"
+	"github.com/shopspring/decimal"
 
 	"upsider-coding-test/shared"
 )
 
 type (
-	InvoiceID          string
-	Amount             int64
-	FeeRate            big.Rat
-	ConsumptionTaxRate big.Rat
-	Status             int
+	InvoiceID string
+	Amount    decimal.Decimal
+	Rate      decimal.Decimal
+	Status    int
+	Fee       struct {
+		value Amount
+		rate  Rate
+	}
+	ConsumptionTax struct {
+		value Amount
+		rate  Rate
+	}
+)
+
+const (
+	CurrentFeeRate            string = "0.04"
+	CurrentConsumptionTaxRate string = "0.10"
 )
 
 func NewInvoiceID() InvoiceID {
@@ -31,66 +41,84 @@ func (id InvoiceID) String() string {
 	return string(id)
 }
 
-func NewAmount(amount int64) (Amount, error) {
-	if amount < 0 {
-		return 0, &shared.ValidationError{Field: "amount", Err: "amount must be greater than or equal to 0"}
+func NewAmount(value string) (Amount, error) {
+	amount, err := decimal.NewFromString(value)
+	if err != nil {
+		return Amount{}, &shared.ArgumentError{Field: "amount", Err: "invalid amount"}
+	}
+	if amount.LessThan(decimal.Zero) {
+		return Amount{}, &shared.ArgumentError{Field: "amount", Err: "amount must be greater than or equal to 0"}
 	}
 	return Amount(amount), nil
 }
-func (a Amount) Int64() int64 {
-	return int64(a)
+func (a Amount) String() string {
+	return a.asDecimal().String()
 }
-func (a Amount) toRat() *big.Rat {
-	return big.NewRat(a.Int64(), 1)
+func (a Amount) asDecimal() decimal.Decimal {
+	return decimal.Decimal(a)
 }
-func (a Amount) IsZero() bool {
-	return a == 0
+func (a Amount) MulRate(rate Rate) Amount {
+	amount := a.asDecimal().Mul(rate.asDecimal())
+	return Amount(amount)
 }
-
-func NewFeeRate() (FeeRate, error) {
-	r := new(big.Rat)
-	rat, ok := r.SetString("0.03")
-	if !ok {
-		return FeeRate(*new(big.Rat)), errors.New("invalid fee rate")
-	}
-	return FeeRate(*rat), nil
-}
-func ParseFeeRate(rate string) (FeeRate, error) {
-	r := new(big.Rat)
-	rat, ok := r.SetString(rate)
-	if !ok {
-		return FeeRate(*rat), &shared.ArgumentError{Field: "fee_rate", Err: "invalid fee rate"}
-	}
-	return FeeRate(*r), nil
-}
-func (f FeeRate) toRat() *big.Rat {
-	return (*big.Rat)(&f)
-}
-func (f FeeRate) String() string {
-	return f.toRat().FloatString(2)
+func (a Amount) Add(amount Amount) Amount {
+	return Amount(a.asDecimal().Add(amount.asDecimal()))
 }
 
-func NewConsumptionTaxRate() (ConsumptionTaxRate, error) {
-	r := new(big.Rat)
-	rat, ok := r.SetString("0.10")
-	if !ok {
-		return ConsumptionTaxRate(*new(big.Rat)), errors.New("invalid consumption tax rate")
+func NewRate(value string) (Rate, error) {
+	rate, err := decimal.NewFromString(value)
+	if err != nil {
+		return Rate{}, &shared.ArgumentError{Field: "rate", Err: "invalid rate"}
 	}
-	return ConsumptionTaxRate(*rat), nil
+	return Rate(rate), nil
 }
-func ParseConsumptionTaxRate(rate string) (ConsumptionTaxRate, error) {
-	r := new(big.Rat)
-	rat, ok := r.SetString(rate)
-	if !ok {
-		return ConsumptionTaxRate(*new(big.Rat)), &shared.ArgumentError{Field: "consumption_tax_rate", Err: "invalid consumption tax rate"}
+func (r Rate) String() string {
+	return r.asDecimal().String()
+}
+func (r Rate) asDecimal() decimal.Decimal {
+	return decimal.Decimal(r)
+}
+
+func NewFee(value Amount, rate Rate) *Fee {
+	return &Fee{value: value, rate: rate}
+}
+func ParseFee(value string, rate string) (*Fee, error) {
+	amount, err := NewAmount(value)
+	if err != nil {
+		return &Fee{}, err
 	}
-	return ConsumptionTaxRate(*rat), nil
+	rateValue, err := NewRate(rate)
+	if err != nil {
+		return &Fee{}, err
+	}
+	return &Fee{value: amount, rate: rateValue}, nil
 }
-func (c ConsumptionTaxRate) toRat() *big.Rat {
-	return (*big.Rat)(&c)
+func (f Fee) Value() Amount {
+	return f.value
 }
-func (c ConsumptionTaxRate) String() string {
-	return c.toRat().FloatString(2)
+func (f Fee) Rate() Rate {
+	return f.rate
+}
+
+func NewConsumptionTax(value Amount, rate Rate) *ConsumptionTax {
+	return &ConsumptionTax{value: value, rate: rate}
+}
+func ParseConsumptionTax(value string, rate string) (*ConsumptionTax, error) {
+	amount, err := NewAmount(value)
+	if err != nil {
+		return &ConsumptionTax{}, err
+	}
+	rateValue, err := NewRate(rate)
+	if err != nil {
+		return &ConsumptionTax{}, err
+	}
+	return &ConsumptionTax{value: amount, rate: rateValue}, nil
+}
+func (c ConsumptionTax) Value() Amount {
+	return c.value
+}
+func (c ConsumptionTax) Rate() Rate {
+	return c.rate
 }
 
 const (
