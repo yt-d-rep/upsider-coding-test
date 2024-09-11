@@ -20,7 +20,7 @@ type (
 		RawPassword string `json:"password" binding:"required"`
 		CompanyID   string `json:"company_id" binding:"required"`
 	}
-	userLoginParams struct {
+	UserLoginParams struct {
 		Email       string `json:"email" binding:"required"`
 		RawPassword string `json:"password" binding:"required"`
 	}
@@ -48,7 +48,7 @@ func (h *userHandler) Register(ctx *gin.Context) {
 }
 
 func (h *userHandler) Login(ctx *gin.Context) {
-	var params userLoginParams
+	var params UserLoginParams
 	if err := ctx.ShouldBindJSON(&params); err != nil {
 		ctx.JSON(400, gin.H{"message": err.Error()})
 		return
